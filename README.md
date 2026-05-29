@@ -11,25 +11,6 @@ Aplikasi web **Lab_Management** untuk pengelolaan peminjaman alat laboratorium d
 - REST API untuk `alat`, `kategori`, dan `peminjaman`.
 - SOAP service untuk dukungan interoperabilitas enterprise.
 
-## Persiapan dan Instalasi
-
-1. Salin `.env.example` menjadi `.env`.
-2. Atur koneksi database dan `APP_URL`.
-3. Jalankan perintah berikut:
-
-```bash
-composer install
-php artisan key:generate
-php artisan migrate
-php artisan storage:link
-```
-
-4. Jalankan server Laravel:
-
-```bash
-php artisan serve
-```
-
 ## Alur Peminjaman Mahasiswa
 
 1. Mahasiswa membuka halaman `Peminjaman` dan memilih alat yang diperlukan.
@@ -121,13 +102,3 @@ curl -X POST \
   --data @request.xml \
   http://127.0.0.1:8000/soap-service
 ```
-
-## Penting
-
-- Pastikan `php artisan storage:link` dijalankan agar file bukti dapat diakses melalui URL publik.
-- Jalankan `php artisan migrate` setelah menambahkan migrasi baru.
-- File bukti disimpan di `storage/app/public/peminjaman/bukti`.
-
-## Lisensi
-
-Proyek ini menggunakan lisensi MIT.
