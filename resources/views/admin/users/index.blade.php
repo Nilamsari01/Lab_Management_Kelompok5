@@ -13,6 +13,9 @@
                     <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
 
+                @if(session('error'))
+                    <div class="alert alert-danger">{{ session('error') }}</div>
+                @endif
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover mb-0">
                         <thead class="table-dark">
@@ -22,6 +25,7 @@
                                 <th>Email</th>
                                 <th>Role</th>
                                 <th>Diizinkan</th>
+                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -32,10 +36,18 @@
                                     <td>{{ $user->email }}</td>
                                     <td>{{ ucfirst($user->role) }}</td>
                                     <td>{{ $user->access_allowed ? 'Ya' : 'Tidak' }}</td>
+                                    <td class="text-nowrap">
+                                        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-sm btn-warning">Edit</a>
+                                        <form method="POST" action="{{ route('admin.users.destroy', $user) }}" class="d-inline" onsubmit="return confirm('Hapus akun {{ addslashes($user->name) }}?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">Hapus</button>
+                                        </form>
+                                    </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="5" class="text-center">Belum ada akun pengguna.</td>
+                                    <td colspan="6" class="text-center">Belum ada akun pengguna.</td>
                                 </tr>
                             @endforelse
                         </tbody>
