@@ -18,7 +18,7 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('peminjaman.store') }}">
+                <form method="POST" action="{{ route('peminjaman.store') }}" enctype="multipart/form-data">
     @csrf
 
     @foreach($alat as $a)
@@ -39,6 +39,12 @@
             </div>
         </div>
     @endforeach
+
+    <div class="mb-3">
+        <label for="bukti" class="form-label">Unggah Bukti Dokumen / Foto</label>
+        <input type="file" class="form-control" id="bukti" name="bukti" accept="image/*">
+        <div class="form-text">Unggah bukti bukti peminjaman untuk dokumentasi dan validasi.</div>
+    </div>
 
     <div class="d-flex justify-content-between mt-4">
         <a href="{{ route('peminjaman.index') }}" class="btn btn-secondary">Kembali</a>

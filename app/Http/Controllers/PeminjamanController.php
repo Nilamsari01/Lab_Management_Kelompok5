@@ -7,6 +7,7 @@ use App\Models\DetailPeminjaman;
 use App\Models\Alat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class PeminjamanController extends Controller
 {
@@ -33,6 +34,7 @@ class PeminjamanController extends Controller
             'alat_id.*' => 'required|integer|exists:alats,id',
             'jumlah' => 'required|array',
             'jumlah.*' => 'nullable|integer|min:1',
+            'bukti' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $totalJumlah = 0;
@@ -40,13 +42,19 @@ class PeminjamanController extends Controller
             $totalJumlah += $request->input('jumlah.' . $alatId, 1);
         }
 
-        $peminjaman = Peminjaman::create([
+        $data = [
             'user_id' => Auth::id(),
             'alat_id' => $request->alat_id[0],
             'jumlah_pinjam' => $totalJumlah,
             'tanggal_pinjam' => now(),
-            'status' => 'pending'
-        ]);
+            'status' => 'pending',
+        ];
+
+        if ($request->hasFile('bukti')) {
+            $data['bukti'] = $request->file('bukti')->store('peminjaman/bukti', 'public');
+        }
+
+        $peminjaman = Peminjaman::create($data);
 
         foreach ($request->alat_id as $alatId) {
             DetailPeminjaman::create([

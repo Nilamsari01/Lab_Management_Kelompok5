@@ -47,6 +47,9 @@
                                     <td>{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d M Y H:i') }}</td>
                                     <td>
                                         {{ ucfirst($item->status) }}
+                                        @if($item->bukti_url)
+                                            <div><a href="{{ $item->bukti_url }}" target="_blank" class="small">Lihat Bukti</a></div>
+                                        @endif
                                         @if($item->status === 'disetujui')
                                             <form action="{{ route('peminjaman.kembalikan', $item) }}" method="POST" class="d-inline ms-2">
                                                 @csrf

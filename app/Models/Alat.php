@@ -10,6 +10,7 @@ class Alat extends Model {
     use HasFactory;
 
     protected $fillable = ['nama_alat', 'kategori', 'stok', 'lokasi', 'gambar'];
+    protected $appends = ['gambar_url'];
 
     // Relasi OOP: Satu alat bisa memiliki banyak riwayat peminjaman
     public function peminjamans() {

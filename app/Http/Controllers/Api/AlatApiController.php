@@ -10,7 +10,7 @@ class AlatApiController extends Controller
 {
     public function index()
     {
-        $alat = Alat::all();
+        $alat = Alat::all()->each->append('gambar_url');
 
         return response()->json([
             'status' => 'success',
@@ -21,6 +21,8 @@ class AlatApiController extends Controller
 
     public function show(Alat $alat)
     {
+        $alat->append('gambar_url');
+
         return response()->json([
             'status' => 'success',
             'data' => $alat
