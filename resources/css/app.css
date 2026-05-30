@@ -1,0 +1,83 @@
+/* =====================================
+   COLOR THEME
+===================================== */
+
+:root{
+    --primary:#1C2E4A;
+    --secondary:#8590ab;
+    --light:#d1cbb8;
+}
+
+/* =====================================
+   GLOBAL
+===================================== */
+.bg-primary{
+    background-color: var(--primary) !important;
+}
+
+body{
+    background:#f5f6f8;
+    font-family:'Helvetica',sans-serif;
+}
+
+h1,h2,h3,h4,h5{
+    color:var(--primary);
+    font-weight:700;
+}
+
+/* =====================================
+   NAVBAR
+===================================== */
+
+.navbar{
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+/* =====================================
+   CARD
+===================================== */
+
+.card{
+    border:none;
+    border-radius:18px;
+    box-shadow:0 8px 25px rgba(28,46,74,.08);
+}
+
+/* =====================================
+   BUTTON
+===================================== */
+
+.btn-primary{
+    background:var(--primary);
+    border-color:var(--primary);
+}
+
+.btn-primary:hover{
+    background:#30486d;
+    border-color:#53709b;
+}
+
+/* =====================================
+   TABLE
+===================================== */
+
+.table {
+    border:1px solid #0f1a2b;
+    border-radius:18px;
+}
+.table th,
+.table td{
+    border: 1px solid #0f1114 !important;
+}
+.table-dark th{
+    background:var(--primary);
+}
+
+.table-bordered th,
+.table-bordered td{
+    border-color: #d6dbe3 !important;
+}
+
+.table-hover tbody tr:hover{
+    background:rgba(189,196,212,.18);
+} 
