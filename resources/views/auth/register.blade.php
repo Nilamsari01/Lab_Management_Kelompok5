@@ -1,60 +1,121 @@
 <x-guest-layout>
+
+<div class="card border-0 shadow-lg rounded-4">
+    <div class="card-body p-5">
+
+```
+    <div class="text-center mb-4">
+        <h2 class="fw-bold text-primary">
+            Registrasi Mahasiswa
+        </h2>
+        <p class="text-muted">
+            Buat akun untuk melakukan peminjaman alat laboratorium
+        </p>
+    </div>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('register') }}">
         @csrf
 
-        <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="mb-3">
+            <label class="form-label fw-semibold">
+                Nama Lengkap
+            </label>
+
+            <input
+                type="text"
+                name="name"
+                value="{{ old('name') }}"
+                class="form-control"
+                placeholder="Masukkan nama lengkap"
+                required>
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="mb-3">
+            <label class="form-label fw-semibold">
+                Email
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                value="{{ old('email') }}"
+                class="form-control"
+                placeholder="Masukkan email"
+                required>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div class="mb-3">
+            <label class="form-label fw-semibold">
+                NIM Mahasiswa
+            </label>
 
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
+            <input
+                type="text"
+                name="nim"
+                value="{{ old('nim') }}"
+                class="form-control"
+                placeholder="Masukkan NIM"
+                required>
 
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <small class="text-muted">
+                Hanya mahasiswa yang dapat melakukan registrasi.
+            </small>
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+        <div class="mb-3">
+            <label class="form-label fw-semibold">
+                Password
+            </label>
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+            <input
+                type="password"
+                name="password"
+                class="form-control"
+                placeholder="Masukkan password"
+                required>
         </div>
 
-        <!-- NIM Mahasiswa -->
-        <div class="mt-4">
-            <x-input-label for="nim" :value="__('NIM Mahasiswa')" />
-            <x-text-input id="nim" class="block mt-1 w-full" type="text" name="nim" :value="old('nim')" required autocomplete="off" />
-            <x-input-error :messages="$errors->get('nim')" class="mt-2" />
-            <p class="text-sm text-gray-500 mt-2">Hanya mahasiswa yang bisa mendaftar di sini. Akun admin dan dosen dibuat oleh administrator.</p>
+        <div class="mb-4">
+            <label class="form-label fw-semibold">
+                Konfirmasi Password
+            </label>
+
+            <input
+                type="password"
+                name="password_confirmation"
+                class="form-control"
+                placeholder="Ulangi password"
+                required>
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
+        <button
+            type="submit"
+            class="btn btn-primary w-100">
+            Daftar
+        </button>
+
+        <div class="text-center mt-3">
+            <a href="{{ route('login') }}"
+               class="text-decoration-none">
+                Sudah punya akun? Login di sini
             </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
         </div>
+
     </form>
+
+</div>
+```
+
+</div>
+
 </x-guest-layout>
