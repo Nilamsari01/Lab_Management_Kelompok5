@@ -1,5 +1,8 @@
 ﻿# Lab Management Kelompok 5
 
+<<<<<<< HEAD
+Aplikasi web **Lab_Management** untuk pengelolaan peminjaman alat laboratorium di institusi pendidikan.
+=======
 Aplikasi web **Lab_Management** untuk pengelolaan peminjaman alat laboratorium di institusi pendidikan.
 
 ## Fitur Utama
@@ -102,3 +105,4 @@ curl -X POST \
   --data @request.xml \
   http://127.0.0.1:8000/soap-service
 ```
+>>>>>>> e2fbda12106b7f72722a210f78374b37fc9013e3

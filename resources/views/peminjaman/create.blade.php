@@ -25,17 +25,17 @@
         <div class="row align-items-center mb-3">
             <div class="col-md-6">
                 <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="alat_{{ $a->id }}" name="alat_id[]" value="{{ $a->id }}">
+                    <input class="form-check-input" type="checkbox" id="alat_{{ $a->id }}" name="alat_id[]" value="{{ $a->id }}" {{ $a->stok <= 0 ? 'disabled' : '' }}>
                     <label class="form-check-label" for="alat_{{ $a->id }}">
                         {{ $a->nama_alat }} ({{ $a->kategori }})
                     </label>
                 </div>
             </div>
             <div class="col-md-3">
-                <input type="number" class="form-control" name="jumlah[{{ $a->id }}]" min="1" placeholder="Jumlah" value="1">
+                <input type="number" class="form-control" name="jumlah[{{ $a->id }}]" min="1" max="{{ $a->stok }}" placeholder="Jumlah" value="{{ $a->stok > 0 ? 1 : 0 }}" {{ $a->stok <= 0 ? 'disabled' : '' }}>
             </div>
             <div class="col-md-3 text-end">
-                <span class="text-muted">Stok: {{ $a->stok }}</span>
+                <span class="text-muted">Stok: {{ $a->stok }} @if($a->stok <= 0)<strong class="text-danger">(Habis)</strong>@endif</span>
             </div>
         </div>
     @endforeach

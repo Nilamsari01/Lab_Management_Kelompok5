@@ -44,7 +44,14 @@
                                         @endif
                                     </td>
                                     <td>{{ $item->details->sum('jumlah') ?: $item->jumlah_pinjam }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($item->tanggal_pinjam)->format('d M Y H:i') }}</td>
+                                    @php
+                                        $tanggalPinjam = $item->tanggal_pinjam;
+
+                                        if ($tanggalPinjam->format('H:i') === '00:00' && $item->created_at) {
+                                            $tanggalPinjam = $item->created_at;
+                                        }
+                                    @endphp
+                                    <td>{{ $tanggalPinjam->format('d M Y H:i') }}</td>
                                     <td>
                                         {{ ucfirst($item->status) }}
                                         @if($item->bukti_url)
