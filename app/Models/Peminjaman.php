@@ -11,6 +11,9 @@ class Peminjaman extends Model {
 
     protected $table = 'peminjamans';
     protected $fillable = ['user_id', 'alat_id', 'jumlah_pinjam', 'tanggal_pinjam', 'status', 'bukti'];
+    protected $casts = [
+        'tanggal_pinjam' => 'datetime',
+    ];
     protected $appends = ['bukti_url'];
 
     // Relasi OOP: Peminjaman ini dimiliki oleh User tertentu
