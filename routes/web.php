@@ -18,13 +18,15 @@ Route::get('/', function () {
         };
     }
 
-    return redirect()->route('alat.index');
+    return view('welcome');
 });
 
-// Publik bisa melihat daftar alat, detail alat, dan daftar kategori
-Route::get('alat', [AlatController::class, 'index'])->name('alat.index');
-Route::get('alat/{alat}', [AlatController::class, 'show'])->name('alat.show')->whereNumber('alat');
-Route::get('kategori', [KategoriController::class, 'index'])->name('kategori.index');
+// Hanya untuk authenticated users - bisa melihat daftar alat, detail alat, dan daftar kategori
+Route::middleware('auth')->group(function () {
+    Route::get('alat', [AlatController::class, 'index'])->name('alat.index');
+    Route::get('alat/{alat}', [AlatController::class, 'show'])->name('alat.show')->whereNumber('alat');
+    Route::get('kategori', [KategoriController::class, 'index'])->name('kategori.index');
+});
 
 // CRUD Web untuk Alat dan Kategori
 Route::middleware(['auth', 'role:admin'])->group(function () {

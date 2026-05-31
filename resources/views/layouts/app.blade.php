@@ -14,15 +14,24 @@
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
         <div class="container py-2">
-            <a class="navbar-brand" href="{{ route('alat.index') }}">Manajemen Alat Lab</a>
+            @auth
+                @if(auth()->user()->role === 'admin')
+                    <a class="navbar-brand" href="{{ route('admin.dashboard') }}">Manajemen Alat Lab</a>
+                @elseif(auth()->user()->role === 'dosen')
+                    <a class="navbar-brand" href="{{ route('dosen.dashboard') }}">Manajemen Alat Lab</a>
+                @elseif(auth()->user()->role === 'mahasiswa')
+                    <a class="navbar-brand" href="{{ route('mahasiswa.dashboard') }}">Manajemen Alat Lab</a>
+                @else
+                    <a class="navbar-brand" href="{{ route('alat.index') }}">Manajemen Alat Lab</a>
+                @endif
+            @else
+                <a class="navbar-brand" href="{{ route('alat.index') }}">Manajemen Alat Lab</a>
+            @endauth
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('alat.index') }}">Alat</a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('kategori.index') }}">Kategori</a>
                     </li>
