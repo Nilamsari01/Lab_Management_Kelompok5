@@ -27,6 +27,8 @@ class Alat extends Model {
             return $this->gambar;
         }
 
-        return Storage::disk('public')->url($this->gambar);
+        // Kembalikan path relatif ke `public/storage` sehingga host dan port
+        // mengikuti permintaan saat ini (mis. saat menjalankan php artisan serve)
+        return '/storage/' . $this->gambar;
     }
 }
