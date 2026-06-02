@@ -4,7 +4,10 @@
 <div class="row">
     <div class="col-12">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h2>Daftar Peminjaman</h2>
+            <div>
+                <h2>Daftar Peminjaman</h2>
+                <small class="text-muted" id="last-updated">Diperbarui baru saja</small>
+            </div>
             <a href="{{ route('peminjaman.create') }}" class="btn btn-primary">Ajukan Peminjaman</a>
         </div>
 
@@ -78,4 +81,29 @@
         </div>
     </div>
 </div>
+
+<!-- Auto-refresh setiap 30 detik -->
+<script>
+    let secondsAgo = 0;
+    const REFRESH_INTERVAL = 30000; // 30 detik
+    
+    // Update tampilan "diperbarui X detik lalu"
+    function updateTimestamp() {
+        secondsAgo++;
+        const el = document.getElementById('last-updated');
+        if (secondsAgo < 60) {
+            el.textContent = `Diperbarui ${secondsAgo} detik lalu`;
+        } else {
+            el.textContent = `Diperbarui ${Math.floor(secondsAgo / 60)} menit lalu`;
+        }
+    }
+    
+    // Update setiap detik
+    setInterval(updateTimestamp, 1000);
+    
+    // Refresh halaman setiap 30 detik
+    setInterval(() => {
+        location.reload();
+    }, REFRESH_INTERVAL);
+</script>
 @endsection
